@@ -1,26 +1,10 @@
 <template>
   <div class="w-full">
-    <header
-      class="w-full flex p-3 mb-8 flex-wrap md:flex-no-wrap h-auto md:h-16 bg-orange-100 justify-between opacity-75"
-    >
-      <div
-        class="w-full h-full justify-center flex flex-wrap md:flex-no-wrap items-center"
-      >
-        <search-field class="w-full mb-3 md:mb-0 mx-3"></search-field>
-        <div class="flex items-center">
-          <select-field
-            v-for="filter in filters"
-            :key="filter.name"
-            :name="filter.name"
-            :options="filter.options"
-            class="mr-2"
-          ></select-field>
-        </div>
-      </div>
-    </header>
     <main>
       <div class="w-full">
-        <div class="p-3">
+        <div
+          class="p-3 md:max-w-2xl lg:max-w-4xl rounded md:mx-auto md:bg-white md:shadow sm:p-4"
+        >
           <div class="mb-2">
             <div class="flex items-center mb-1">
               <img
@@ -43,7 +27,7 @@
                 I Wanna Live Life Like it is my last day on earth
               </h1>
               <button
-                class="block flex-shrink-0 text-xs sm:text-sm rounded border p-2 border-green-500 text-green-500 font-semibold"
+                class="block hover:bg-green-500 hover:text-white flex-shrink-0 text-xs sm:text-sm rounded border p-2 border-green-500 text-green-500 font-semibold"
               >
                 Download Markdown
               </button>

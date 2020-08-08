@@ -1,5 +1,5 @@
 <template>
-  <span class="block">
+  <span class="block w-4 h-4">
     <svg :class="color" fill="currentColor" viewBox="0 0 20 20">
       <path
         fill-rule="evenodd"
