@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 rounded flex items-center px-2">
+  <div :class="background" class="rounded flex items-center px-2">
     <search-icon class="flex-shrink-0 w-5 h-5" />
     <input
       v-model="value"
@@ -21,6 +21,10 @@ export default {
     placeholder: {
       type: String,
       default: () => 'Search...',
+    },
+    background: {
+      type: String,
+      default: () => 'bg-gray-200',
     },
   },
   data() {

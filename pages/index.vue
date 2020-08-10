@@ -1,39 +1,63 @@
 <template>
   <div class="w-full p-2 sm:p-4">
-    <search-field />
+    <search-field class="border" />
     <div>
       <div class="flex mt-2 relative justify-between sm:mt-4">
-        <select-field :options="filters[1].options" :name="filters[1].name" />
         <button
-          class="text-sm font-semibold block focus:outline-none rounded px-2 py-1 bg-blue-500 text-white"
-          @click="addTag = !addTag"
+          class="text-sm border border-gray-700 hover:bg-gray-700 hover:text-gray-100 text-gray-700 mb-1 font-semibold flex items-center focus:outline-none rounded px-2 py-1"
+          @click="modal = modal === 'country' ? '' : 'country'"
         >
-          HashTags
+          <span>Country:</span>
+          <span class="block ml-1 font-bold">{{ country || 'Any' }}</span>
         </button>
-        <div
-          :class="addTag ? '' : 'hidden'"
-          class="absolute right-0 mt-8 p-1 rounded bg-white shadow-lg"
+        <searchable-list
+          v-slot="{ item }"
+          :items="filters[1].options"
+          :class="modal === 'country' ? '' : 'hidden'"
+          class="absolute left-0 mt-10"
         >
-          <search-field placeholder="Search for hashtag..." />
-          <ul class="mt-2">
-            <li v-for="tag in filters[0].options" :key="tag.value" class="mb-1">
-              <button
-                class="w-full rounded p-1 focus:outline-none hover:bg-gray-200"
-                @click="addHashTag(tag)"
-              >
-                <span class="text-sm w-full font-semibold text-center">{{
-                  tag.content
-                }}</span>
-                <span
-                  class="text-xs px-2 py-1 rounded-full bg-gray-100 font-semibold"
-                  >{{ tag.value }}</span
-                >
-              </button>
-            </li>
-          </ul>
-        </div>
+          <button
+            class="w-full rounded p-1 focus:outline-none hover:bg-gray-500"
+            @click="pickCountry(item)"
+          >
+            <span
+              class="text-sm text-gray-100 w-full font-semibold text-center"
+              >{{ item.content }}</span
+            >
+          </button>
+        </searchable-list>
+
+        <button
+          class="text-sm border border-gray-700 hover:bg-gray-700 hover:text-gray-100 text-gray-700 mb-1 font-semibold flex items-center focus:outline-none rounded px-2 py-1"
+          @click="modal = modal === 'tag' ? '' : 'tag'"
+        >
+          <span>HashTags</span>
+          <chevron-up v-if="modal === 'tag'" class="ml-1" />
+          <chevron-down v-else class="ml-1" />
+        </button>
+        <searchable-list
+          v-slot="{ item }"
+          :items="filters[0].options"
+          :class="modal === 'tag' ? '' : 'hidden'"
+          placeholder="Search hashTags..."
+          class="absolute right-0 mt-10"
+        >
+          <button
+            class="w-full rounded p-1 focus:outline-none hover:bg-gray-500"
+            @click="addHashTag(item)"
+          >
+            <span
+              class="text-sm text-gray-100 w-full font-semibold text-center"
+              >{{ item.content }}</span
+            >
+            <span
+              class="ml-1 text-xs px-2 py-1 rounded-full text-gray-700 bg-white shadow-sm font-bold"
+              >{{ item.value }}</span
+            >
+          </button>
+        </searchable-list>
       </div>
-      <div class="flex flex-wrap mt-4">
+      <div class="flex flex-wrap mt-2 sm:mt-4">
         <hash-tag
           v-for="tag in filterTags"
           :key="tag.value"
@@ -56,10 +80,10 @@
           <td class="py-2">
             <up-arrow />
           </td>
-          <td class="w-1/3 py-2">
+          <td class="w-1/3 sm:w-1/2 md:w-3/5 py-2">
             <a
               href="#"
-              class="tracking-tight text-sm md:text-base leading-tight hover:underline font-semibold"
+              class="block tracking-tight text-sm md:text-base leading-tight hover:underline font-semibold"
               >{{ thread.title }}</a
             >
           </td>
@@ -85,14 +109,15 @@
 export default {
   data() {
     return {
-      addTag: false,
+      modal: '',
+      country: '',
       filterTags: [],
       filters: [
         {
           name: 'Hashtags',
           options: [
             { value: 0, content: 'Politics' },
-            { value: 1, content: 'Technology' },
+            { value: 112677, content: 'Technology' },
             { value: 2, content: 'History' },
           ],
         },
@@ -158,6 +183,10 @@ export default {
     },
     removeHashTag(tag) {
       this.filterTags = this.filterTags.filter((t) => t.value !== tag.value)
+    },
+    pickCountry(country) {
+      this.chooseCountry = false
+      this.country = country.content
     },
   },
 }

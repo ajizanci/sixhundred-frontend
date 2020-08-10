@@ -1,6 +1,6 @@
 <template>
   <span
-    class="bg-orange-400 text-gray-100 flex px-2 py-1 rounded text-xs font-bold"
+    class="bg-orange-400 shadow text-gray-100 flex px-2 py-1 rounded text-xs font-bold"
   >
     <span class="block mr-2">{{ hashTag }}</span>
     <close-icon
