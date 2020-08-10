@@ -8,7 +8,12 @@
         Download All
       </button>
     </div>
-    <searchable-list v-slot="{ item }" class="p-2" :items="threads">
+    <searchable-list
+      v-slot="{ item }"
+      class="p-2"
+      :items="threads"
+      search-key="title"
+    >
       <div class="flex py-1 justify-between items-center">
         <a
           href="#"

@@ -4,7 +4,7 @@
     <div>
       <div class="flex mt-2 relative justify-between sm:mt-4">
         <button
-          class="text-sm border border-gray-700 hover:bg-gray-700 hover:text-gray-100 text-gray-700 mb-1 font-semibold flex items-center focus:outline-none rounded px-2 py-1"
+          class="text-sm border border-gray-700 hover:bg-gray-700 hover:text-gray-100 text-gray-700 font-semibold flex items-center focus:outline-none rounded px-2 py-1"
           @click="modal = modal === 'country' ? '' : 'country'"
         >
           <span>Country:</span>
@@ -14,6 +14,8 @@
           v-slot="{ item }"
           :items="filters[1].options"
           :class="modal === 'country' ? '' : 'hidden'"
+          search-key="content"
+          placeholder="Search countries..."
           class="absolute left-0 mt-10"
         >
           <button
@@ -28,7 +30,7 @@
         </searchable-list>
 
         <button
-          class="text-sm border border-gray-700 hover:bg-gray-700 hover:text-gray-100 text-gray-700 mb-1 font-semibold flex items-center focus:outline-none rounded px-2 py-1"
+          class="text-sm border border-gray-700 hover:bg-gray-700 hover:text-gray-100 text-gray-700 font-semibold flex items-center focus:outline-none rounded px-2 py-1"
           @click="modal = modal === 'tag' ? '' : 'tag'"
         >
           <span>HashTags</span>
@@ -39,6 +41,7 @@
           v-slot="{ item }"
           :items="filters[0].options"
           :class="modal === 'tag' ? '' : 'hidden'"
+          search-key="content"
           placeholder="Search hashTags..."
           class="absolute right-0 mt-10"
         >
